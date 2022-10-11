@@ -279,3 +279,150 @@
 // Animal.prototype = {};
 
 // console.log(animal instanceof Animal);
+
+//비동기
+
+// const myPromise = new Promise((resolve, reject) => {
+//   console.log("doning some heavy work: network, read files");
+//   setTimeout(() => {
+//     resolve("hi");
+//     reject(new Error("this is error msg"));
+//   }, 2000);
+// });
+
+// myPromise
+//   .then((value) => {
+//     console.log(value); // resolve 가 있다면 'hi' 출력
+//   })
+//   .catch((error) => {
+//     console.log(error); // reject에 있는 'this is error msg' 출력
+//   })
+//   .finally(() => {
+//     console.log("finally!!");
+//   });
+
+// const initialPokemon = () =>
+//   new Promise((resolve, reject) => {
+//     setTimeout(() => resolve("파이리"), 1000);
+//   });
+
+// const nextPokemon = (prevPokemon) =>
+//   new Promise((resolve, reject) => {
+//     setTimeout(() => resolve(`${prevPokemon} => 리자드`), 1000);
+//   });
+
+// const finalPokemon = (prevPokemon) =>
+//   new Promise((resolve, reject) => {
+//     setTimeout(() => resolve(`${prevPokemon} => 리자몽`), 1000);
+//   });
+
+// initialPokemon() // 1초 소요
+//   .then((prev) => {
+//     console.log(prev); // 파이리
+//     return nextPokemon(prev); // 1초 소요
+//   })
+//   .then((prev) => {
+//     console.log(prev); // 파이리 => 리자드
+//     return finalPokemon(prev); // 1초 소요
+//   })
+//   .then(console.log); // 파이리 => 리자드 => 리자몽
+
+// let promise = new Promise(function (resolve, reject) {
+//   resolve(1);
+
+//   setTimeout(() => resolve(2), 1000);
+// });
+
+// promise.then(console.log());
+
+// let promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve(1), 1000);
+// });
+
+// promise.then(function (result) {
+//   console.log(result);
+//   return result * 2;
+// });
+
+// promise.then(function (result) {
+//   console.log(result);
+//   return result * 2;
+// });
+
+// promise.then(function (result) {
+//   console.log(result);
+//   return result * 2;
+// });
+
+// new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve(1), 1000); // (*)
+// })
+//   .then(function (result) {
+//     // (**)
+
+//     console.log(result); // 1
+//     return result * 2;
+//   })
+//   .then(function (result) {
+//     // (***)
+
+//     console.log(result); // 2
+//     return result * 2;
+//   })
+//   .then(function (result) {
+//     console.log(result); // 4
+//     return result * 2;
+//   });
+
+// class HttpError extends Error {
+//     constructor(response) {
+//       super(`${response.status} for ${response.url}`);
+//       this.name = 'HttpError';
+//       this.response = response;
+//     }
+//   }
+
+//   function loadJson(url) {
+//     return fetch(url)
+//       .then(response => {
+//         if (response.status == 200) {
+//           return response.json();
+//         } else {
+//           throw new HttpError(response);
+//         }
+//       })
+//   }
+
+//   // 유효한 사용자를 찾을 때까지 반복해서 username을 물어봄
+//   function demoGithubUser() {
+//     let name = prompt("GitHub username을 입력하세요.", "iliakan");
+
+//     return loadJson(`https://api.github.com/users/${name}`)
+//       .then(user => {
+//         alert(`이름: ${user.name}.`);
+//         return user;
+//       })
+//       .catch(err => {
+//         if (err instanceof HttpError && err.response.status == 404) {
+//           alert("일치하는 사용자가 없습니다. 다시 입력해 주세요.");
+//           return demoGithubUser();
+//         } else {
+//           throw err;
+//         }
+//       });
+//   }
+
+//   demoGithubUser();
+
+// async function wait() {
+//     await new Promise(resolve => setTimeout(resolve, 1000));
+
+//     return 10;
+//   }
+
+//   function f() {
+//     // shows 10 after 1 second
+//     wait().then(result => alert(result));
+//   }
+
+//   f();
