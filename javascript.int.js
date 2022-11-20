@@ -425,4 +425,52 @@
 //     wait().then(result => alert(result));
 //   }
 
-//   f();
+// //   f();
+// const arr = new Proxy([], {
+//   set(target, prop, value) {
+//     if (typeof value === "number") {
+//       target[prop] = value;
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   },
+// });
+
+// arr.push(1);
+// arr.push(2);
+// arr.push(3);
+// arr.push("졸려"); // VM503:1 Uncaught TypeError: 'set' on proxy: trap returned falsish for property '3'
+
+// console.log([...arr]); // 1, 2, 3
+
+// const Animal = {
+//   name: "tofu",
+//   type: "Dog",
+//   greeting: function () {
+//     console.log(`Animal name is ${this.name}`);
+//   },
+// };
+
+// console.log(Reflect.has(Animal, "type"));
+// console.log(Reflect.has(Animal, "gender"));
+
+// function abc(a, b) {
+//   const ab1 = a + b;
+
+//   console.log(ab1);
+// }
+
+// abc(1, 2);
+
+function a() {
+  const ab = 123;
+  console.log(ab);
+  return ab;
+}
+
+function b() {
+  a().ab;
+}
+
+b();
